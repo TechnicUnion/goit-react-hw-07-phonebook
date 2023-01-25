@@ -1,19 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { nanoid } from 'nanoid';
 
-// const contactsInitialState =
-//   JSON.parse(window.localStorage.getItem('contacts')) ?? [];
 const initialState = {
-  contacts: [
-    //   { id: 'id-1', name: 'Vlad', number: '30948263846' },
-    //   { id: 'id-2', name: 'Igor', number: '30948262345' },
-    //   { id: 'id-3', name: 'Vova', number: '30234857235' },
-    // ],
-  ],
+  contacts: [],
 };
 const contactsSlice = createSlice({
   name: 'contacts',
-  // initialState: contactsInitialState,
   initialState: initialState,
   reducers: {
     addContact: {
@@ -23,7 +15,6 @@ const contactsSlice = createSlice({
           .includes(action.payload.name)
           ? alert(`${action.payload.name} is already in contacts.`)
           : state.contacts.push(action.payload);
-        // window.localStorage.setItem('contacts', JSON.stringify(state));
       },
       prepare(data) {
         return {
@@ -41,7 +32,6 @@ const contactsSlice = createSlice({
         task => task.id === action.payload
       );
       state.contacts.splice(index, 1);
-      // window.localStorage.setItem('contacts', JSON.stringify(state));
     },
   },
 });

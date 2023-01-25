@@ -10,9 +10,6 @@ export default function App() {
   const filter = useSelector(state => state.filter);
   const contactsLict = useSelector(state => state.contacts);
 
-  console.log(1);
-
-  // const contactsValue = Object.values(contacts);
   const dispatch = useDispatch();
 
   const changeFilter = eve => {
@@ -32,6 +29,7 @@ export default function App() {
   };
 
   const filteredOutContactsList = getFilteredOutContacts();
+
   return (
     <div>
       <h2>Phonebook</h2>
