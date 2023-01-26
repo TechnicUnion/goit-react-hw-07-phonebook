@@ -19,8 +19,6 @@ export default function App() {
     dispatch(fetchContacts());
   }, [dispatch]);
 
-  console.log(contactsLict);
-
   const changeFilter = eve => {
     dispatch(filterValue(eve.currentTarget.value));
   };
