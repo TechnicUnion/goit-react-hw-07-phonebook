@@ -22,26 +22,22 @@ const contactsSlice = createSlice({
   extraReducers: {
     [fetchContacts.pending]: handlePending,
     [fetchContacts.fulfilled](state, action) {
-      state.contacts.isLoading = false;
-      state.contacts.error = null;
+      state.isLoading = false;
+      state.error = null;
       state.contacts.items = action.payload;
     },
     [fetchContacts.rejected]: handleRejected,
     [addContact.pending]: handlePending,
     [addContact.fulfilled](state, action) {
-      state.contacts.isLoading = false;
-      state.contacts.error = null;
+      state.isLoading = false;
+      state.error = null;
       state.contacts.items.push(action.payload);
-      // .map(contact => contact.name)
-      // .includes(action.payload.name)
-      // ? alert(`${action.payload.name} is already in contacts.`)
-      // : state.contacts.items.push(action.payload);
     },
     [addContact.rejected]: handleRejected,
     [deleteContact.pending]: handlePending,
     [deleteContact.fulfilled](state, action) {
-      state.contacts.isLoading = false;
-      state.contacts.error = null;
+      state.isLoading = false;
+      state.error = null;
       const index = state.contacts.items.findIndex(
         item => item.id === action.payload.id
       );

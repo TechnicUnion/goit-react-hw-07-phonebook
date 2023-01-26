@@ -10,10 +10,10 @@ import { deleteContact, fetchContacts } from 'redux/operations';
 export default function App() {
   const filter = useSelector(state => state.filter);
   const contactsList = useSelector(state => state.contacts);
-  console.log(contactsList.contacts);
+
   const dispatch = useDispatch();
-  // const isLoading = useSelector(state => state.contacts.isLoading);
-  // const error = useSelector(state => state.contacts.error);
+  const isLoading = useSelector(state => state.contacts.isLoading);
+  const error = useSelector(state => state.contacts.error);
 
   useEffect(() => {
     dispatch(fetchContacts());
@@ -44,10 +44,13 @@ export default function App() {
 
       <h2>Contacts</h2>
       <Filter value={filter} onChange={changeFilter} />
+
       <ContactList
         itemList={filteredOutContactsList}
         onDeleteClick={deletContact}
-      />
+      >
+        {isLoading && !error && <b>Request in progress...</b>}
+      </ContactList>
     </div>
   );
 }
