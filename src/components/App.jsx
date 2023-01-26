@@ -1,16 +1,25 @@
 // import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Filter from './Filter/Filter';
 import ContactList from './ContactList/ContactList';
 import ContactForm from './ContactForm/ContactForm';
 import { filterValue } from 'redux/filtersSlice';
-import { deleteContact } from 'redux/contactsSlice';
+import { deleteContact, fetchContacts } from 'redux/operations';
 
 export default function App() {
   const filter = useSelector(state => state.filter);
   const contactsLict = useSelector(state => state.contacts);
 
   const dispatch = useDispatch();
+  // const isLoading = useSelector(state => state.contacts.isLoading);
+  // const error = useSelector(state => state.contacts.error);
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
+  console.log(contactsLict);
 
   const changeFilter = eve => {
     dispatch(filterValue(eve.currentTarget.value));
@@ -19,7 +28,7 @@ export default function App() {
   const getFilteredOutContacts = () => {
     const normalizeFilter = filter.toLowerCase();
 
-    return contactsLict.contacts.filter(person =>
+    return contactsLict.contacts.items.filter(person =>
       person.name.includes(normalizeFilter)
     );
   };
