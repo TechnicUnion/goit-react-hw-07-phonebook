@@ -9,8 +9,8 @@ import { deleteContact, fetchContacts } from 'redux/operations';
 
 export default function App() {
   const filter = useSelector(state => state.filter);
-  const contactsLict = useSelector(state => state.contacts);
-
+  const contactsList = useSelector(state => state.contacts);
+  console.log(contactsList.contacts);
   const dispatch = useDispatch();
   // const isLoading = useSelector(state => state.contacts.isLoading);
   // const error = useSelector(state => state.contacts.error);
@@ -26,8 +26,8 @@ export default function App() {
   const getFilteredOutContacts = () => {
     const normalizeFilter = filter.toLowerCase();
 
-    return contactsLict.contacts.items.filter(person =>
-      person.name.includes(normalizeFilter)
+    return contactsList.contacts.items.filter(person =>
+      person.name.toLowerCase().includes(normalizeFilter)
     );
   };
 

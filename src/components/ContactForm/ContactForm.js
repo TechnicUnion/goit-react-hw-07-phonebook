@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import css from './ContactForm.module.css';
 import { addContact } from 'redux/operations';
 
 export default function ContactForm() {
+  const contactsLict = useSelector(state => state.contacts);
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
 
@@ -28,7 +29,10 @@ export default function ContactForm() {
   const handleSubmit = eve => {
     eve.preventDefault();
     const contact = { name, phone };
-    dispatch(addContact(contact));
+
+    contactsLict.contacts.items.map(contact => contact.name).includes(name)
+      ? alert(`${name} is already in contacts.`)
+      : dispatch(addContact(contact));
     inputReset();
   };
 
