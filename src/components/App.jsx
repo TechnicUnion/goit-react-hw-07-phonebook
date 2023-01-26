@@ -6,6 +6,7 @@ import ContactList from './ContactList/ContactList';
 import ContactForm from './ContactForm/ContactForm';
 import { filterValue } from 'redux/filtersSlice';
 import { deleteContact, fetchContacts } from 'redux/operations';
+import Loader from './Loader/Loader';
 
 export default function App() {
   const filter = useSelector(state => state.filter);
@@ -45,12 +46,13 @@ export default function App() {
       <h2>Contacts</h2>
       <Filter value={filter} onChange={changeFilter} />
 
-      <ContactList
-        itemList={filteredOutContactsList}
-        onDeleteClick={deletContact}
-      >
-        {isLoading && !error && <b>Request in progress...</b>}
-      </ContactList>
+      {isLoading && !error && <Loader />}
+      {!isLoading && (
+        <ContactList
+          itemList={filteredOutContactsList}
+          onDeleteClick={deletContact}
+        />
+      )}
     </div>
   );
 }
